@@ -1,0 +1,18 @@
+Tic-tac-toe
+
+Player 1 e Player 2 si alternano posizioando X e O in una griglia di 3x3 spazi
+
+1. Game starts
+2. Player 1 posiziona X
+3. Player 2 posiziona O
+    3a. IF ci sono tre X o tre O consecutivi in riga, colonna o diagonale. Game ends. Dichiara il vincitore
+    3b. ELSE IF tutti gli spazi sono occupati- Game ends. Sarà un pareggio
+    3c. ELSE ripetere points 2 e 3
+
+
+Elementi del gioco e possibili Classi
+
+Players
+Gameboard (una lista contenente altre 3 liste di 3 elementi?) dove appariranno le scelte dei giocatori
+Match che gestisce la turnazione tra i due Players e la Gameboard
+Player_Choice (classe separata o parte della classe Player?)
