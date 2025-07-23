@@ -20,6 +20,7 @@ class Player
   end
 end
 
+# test per controllo funzionalità
 player_one = Player.new('Fabio', 'X')
 player_two = Player.new('Biagio', 'O')
 player_one.make_choice

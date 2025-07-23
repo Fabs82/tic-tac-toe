@@ -15,13 +15,20 @@ Elementi del gioco e possibili Classi
 Players
 Gameboard (una lista contenente altre 3 liste di 3 elementi?) dove appariranno le scelte dei giocatori
 Match che gestisce la turnazione tra i due Players e la Gameboard
-Player_Choice (classe separata o parte della classe Player?)
+Round. Classe che gestisce un singolo round tra i players (? classe separata o parte di Match)
 
 
-CLASS PLAYER (cosa è, instanc variables - cosa fa, class methods)
-Inizializzata con due parametri (nome e simbolo).
-Ha un solo metodo (make_choice) perchè il giocatore fa una sola cosa. Sceglie una casella dove mettere il simbolo.
-Utilizza i numeri da 1 a 9 per dare una coordinata che verrà passata alla classe Gameboard (due nested arrays contenenti numeri da 1 a 9).
-Il giocatore sceglie un numero tra 1 e 9. Return deel numero per poi passarlo a Gameboard.
-Un unless loop controlla la validità dell'input del giocatore.
-Il nome è una semplice variabile interna. symbol servirà anche ad altre classi: Per cui leggibile con attr_accessor reader.
+CLASS PLAYER (cosa è, instance variables - cosa fa, methods)
+1. Inizializzata con due parametri (nome e simbolo).
+2. Ha un solo metodo (make_choice) perchè il giocatore fa una sola cosa. Sceglie una casella dove mettere il simbolo.
+3. Utilizza i numeri da 1 a 9 per dare una coordinata che verrà passata alla classe Gameboard (due nested arrays contenenti numeri da 1 a 9).
+4. Il giocatore sceglie un numero tra 1 e 9. Return deel numero per poi passarlo a Gameboard.
+5. Un unless loop controlla la validità dell'input del giocatore.
+6. Il nome è una semplice variabile interna. symbol servirà anche ad altre classi: Per cui leggibile con attr_accessor reader.
+
+CLASS GAMEBOARD
+1. Inizializzazione e creazione della griglia iniziale (3x3 con nested arrays [[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+2. Secondo metodo: check_position. Prende la position da player_choice e controlla se la cella é disponibile nella griglia. 
+    2a. IF true, seguirà update_position (che assegna il symbol della classe Player alla cella scelta. Logica gestita da Round o Match?)
+    2b. ELSE, restituisce un messaggio per dire che la scelta non é valida e Player dovrà poter scegliere di nuovo (logica gestita da Round o Match)
+3. Terzo metodo: update position. Se la scelta passa il controllo di check_position assegna il simbolo alla cella corrispondente
