@@ -26,9 +26,11 @@ class Gameboard
   end
 
   def display_gameboard
+    @board.each { |row| p row }
   end
 end
 
 gameboard = Gameboard.new
 gameboard.check_position?(9)
 gameboard.update_position('X', 9)
+gameboard.display_gameboard
