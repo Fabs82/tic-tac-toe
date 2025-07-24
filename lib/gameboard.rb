@@ -1,9 +1,18 @@
-# Classe che gestisce la gameboard. Controlla se la cell é disponibile e posiziona la scelta del Player
+# Classe che crea e gestisce la gameboard. Controlla se la cell é disponibile e posiziona la scelta del Player
 class Gameboard
-  def initialize
-  end
-
-  def create_grid
+  def initialize(symbol, position)
+    @symbol = symbol
+    @position = position
+    board = []
+    n = 1
+    3.times do |nested_array|
+      board[nested_array] = []
+      3.times do |cell|
+        board[nested_array][cell] = n
+        n += 1
+      end
+      p board[nested_array]
+    end
   end
 
   def check_position
@@ -13,4 +22,4 @@ class Gameboard
   end
 end
 
-gameboard = Gameboard.new
+gameboard = Gameboard.new('X', 2)
