@@ -14,17 +14,21 @@ class Gameboard
   end
 
   def check_position?(position)
-    @board.each do |nested_array|
-      nested_array.each do |cell|
-        return true if cell == position
-      end
-    end
-    false
+    row = (position - 1) / @board.length
+    column = (position - 1) % @board.length
+    false unless @board[row][column] == position
   end
 
-  def update_position
+  def update_position(symbol, position)
+    row = (position - 1) / @board.length
+    column = (position - 1) % @board.length
+    @board[row][column] = symbol
+  end
+
+  def display_gameboard
   end
 end
 
 gameboard = Gameboard.new
-p gameboard.check_position?(4)
+gameboard.check_position?(9)
+gameboard.update_position('X', 9)
