@@ -1,5 +1,7 @@
 # Classe che crea e gestisce la gameboard. Controlla se la cell é disponibile e posiziona la scelta del Player
 class Gameboard
+  attr_reader :board
+
   def initialize
     @board = []
     n = 1
@@ -16,7 +18,8 @@ class Gameboard
   def check_position?(position)
     row = (position - 1) / @board.length
     column = (position - 1) % @board.length
-    false unless @board[row][column] == position
+    # p @board[row][column]
+    @board[row][column] == position
   end
 
   def update_position(symbol, position)
@@ -30,7 +33,8 @@ class Gameboard
   end
 end
 
-gameboard = Gameboard.new
-gameboard.check_position?(9)
-gameboard.update_position('X', 9)
-gameboard.display_gameboard
+# test per controllo funzionalità
+# gameboard = Gameboard.new
+# gameboard.check_position?(1)
+# gameboard.update_position('X', 9)
+# gameboard.display_gameboard

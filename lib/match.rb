@@ -1,0 +1,53 @@
+require_relative 'player'
+require_relative 'gameboard'
+# classe che gestisce l'andamento dell'intero gioco appoggiandosi sulla classe Gameboard e PLayer
+class Match
+  def initialize
+    @player_one = Player.new('Fabio', 'X')
+    @player_two = Player.new('Biagio', 'O')
+    @gameboard = Gameboard.new
+  end
+
+  def start_game
+    game_is_on = true
+    while game_is_on
+      turn(@player_one)
+      if check_endgame?(@player_one) == true
+        game_is_on = false
+        p "#{@player_one.name} wins"
+      else
+        turn(@player_two)
+        if check_endgame?(@player_two) == true
+          game_is_on = false
+          p "#{@player_two.name} wins"
+        end
+      end
+    end
+  end
+
+  def turn(current_player)
+    position = current_player.make_choice
+    until @gameboard.check_position?(position) == true
+      puts 'Position not valid'
+      position = current_player.make_choice
+    end
+    @gameboard.update_position(current_player.symbol, position)
+    @gameboard.display_gameboard
+    # check_endgame?
+  end
+
+  def check_endgame?(current_player)
+    board = @gameboard.board
+    #  1 CONDITION: if all elements in a row are the same (X or O) return TRUE
+    #  2 CONDITION: if all elements in a column (across multiple arrays) are the same (X or O) return TRUE
+    #  3 CONDITION: if all elements in diagonal (across multiple arrays) are the same (X or O) return TRUE
+    #  4 CONDITION: if none of the arrays contains a number then the board is full and it is a draw, return TRUE
+    board.each do |row|
+      return true if row.all? { |element| element == current_player.symbol }
+    end
+  end
+end
+
+game = Match.new
+
+game.start_game

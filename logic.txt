@@ -32,3 +32,6 @@ CLASS GAMEBOARD
     2a. IF true, seguirà update_position (che assegna il symbol della classe Player alla cella scelta. Logica gestita da Round o Match?)
     2b. ELSE, restituisce un messaggio per dire che la scelta non é valida e Player dovrà poter scegliere di nuovo (logica gestita da Round o Match)
 3. Terzo metodo: update position. Se la scelta passa il controllo di check_position assegna il simbolo alla cella corrispondente
+4. Quarto metodo: display updated griglia
+
+CLASS MATCH
