@@ -37,14 +37,27 @@ class Match
   end
 
   def check_endgame?(current_player)
-    board = @gameboard.board
+    check_rows?(current_player)
+  end
+
+  def check_rows?(current_player)
     #  1 CONDITION: if all elements in a row are the same (X or O) return TRUE
-    #  2 CONDITION: if all elements in a column (across multiple arrays) are the same (X or O) return TRUE
-    #  3 CONDITION: if all elements in diagonal (across multiple arrays) are the same (X or O) return TRUE
-    #  4 CONDITION: if none of the arrays contains a number then the board is full and it is a draw, return TRUE
+    board = @gameboard.board
     board.each do |row|
       return true if row.all? { |element| element == current_player.symbol }
     end
+  end
+
+  def check_columns?(current_player)
+    #  2 CONDITION: if all elements in a column (across multiple arrays) are the same (X or O) return TRUE.
+  end
+
+  def check_diagonals?(current_player)
+    #  3 CONDITION: if all elements in diagonal (across multiple arrays) are the same (X or O) return TRUE
+  end
+
+  def check_for_draw?
+    #  4 CONDITION: if none of the arrays contains a number then the board is full and it is a draw, return TRUE
   end
 end
 
