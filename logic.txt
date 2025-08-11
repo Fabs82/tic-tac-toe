@@ -35,3 +35,6 @@ CLASS GAMEBOARD
 4. Quarto metodo: display updated griglia
 
 CLASS MATCH
+1. Inizializzazione della partita con la classe Player e Gameboard
+2. Gestione dei turni della partita tramite un WHILE loop e un flag on/off.
+3. Logica di controllo per l'endgame. Check delle rows, columns, diagonals e se tutte le caselle sono occupate, draw
