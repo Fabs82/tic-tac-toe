@@ -39,6 +39,7 @@ class Match
   def check_endgame?(current_player)
     check_rows?(current_player)
     check_columns?(current_player)
+    check_diagonals?(current_player)
   end
 
   def check_rows?(current_player)
@@ -51,7 +52,6 @@ class Match
 
   def check_columns?(current_player)
     #  2 CONDITION: if all elements in a column (across multiple arrays) are the same (X or O) return TRUE.
-    #  Loop sulle righe della board. Prendi index_0 delle 3 righe e lo aggiungi a new_array. Controlli new_array. index + 1. Ripeti il loop sulle righe con index_1
     board = @gameboard.board.transpose
     board.each do |row|
       return true if row.all? { |element| element == current_player.symbol }
@@ -60,6 +60,11 @@ class Match
 
   def check_diagonals?(current_player)
     #  3 CONDITION: if all elements in diagonal (across multiple arrays) are the same (X or O) return TRUE
+    board = @gameboard.board
+    first_diagonal = [board[0][0], board[1][1], board[2][2]]
+    second_diagonal = [board[0][2], board[1][1], board[2][0]]
+    first_diagonal.all? { |element| element == current_player.symbol } ||
+      second_diagonal.all? { |element| element == current_player.symbol }
   end
 
   def check_for_draw?
@@ -68,5 +73,4 @@ class Match
 end
 
 game = Match.new
-
 game.start_game
