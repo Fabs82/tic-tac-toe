@@ -10,23 +10,20 @@ class Match
 
   def start_game
     game_is_on = true
+    players = [@player_one, @player_two]
+    position = 0
     while game_is_on
-      turn(@player_one)
-      if check_winner?(@player_one)
-        p "#{@player_one.name} wins"
+      current_player = players[position % 2]
+      p "TURN NUMBER #{position + 1}"
+      turn(current_player)
+      if check_winner?(current_player)
+        p "#{current_player.name} wins"
         game_is_on = false
       elsif check_for_draw?
         p 'It is a draw'
         game_is_on = false
       else
-        turn(@player_two)
-        if check_winner?(@player_two)
-          p "#{@player_two.name} wins"
-          game_is_on = false
-        elsif check_for_draw?
-          p 'It is a draw'
-          game_is_on = false
-        end
+        position += 1
       end
     end
   end
