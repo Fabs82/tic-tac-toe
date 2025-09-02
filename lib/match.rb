@@ -9,6 +9,7 @@ class Match
   end
 
   def start_game
+    @gameboard.display_gameboard
     game_is_on = true
     players = [@player_one, @player_two]
     position = 0

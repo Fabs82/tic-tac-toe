@@ -11,7 +11,6 @@ class Gameboard
         @board[nested_array][cell] = n
         n += 1
       end
-      p @board[nested_array]
     end
   end
 
@@ -29,7 +28,13 @@ class Gameboard
   end
 
   def display_gameboard
-    @board.each { |row| p row }
+    # @board.each { |row| row.join(' | ') }
+    puts "\n"
+    @board.each_with_index do |row, idx|
+      puts row.join(' | ')
+      puts '---------' if idx < 2
+    end
+    puts "\n"
   end
 end
 
@@ -37,4 +42,3 @@ end
 # gameboard = Gameboard.new
 # gameboard.check_position?(1)
 # gameboard.update_position('X', 9)
-# gameboard.display_gameboard
