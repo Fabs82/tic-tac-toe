@@ -12,14 +12,20 @@ class Match
     game_is_on = true
     while game_is_on
       turn(@player_one)
-      if check_endgame?(@player_one) == true
-        game_is_on = false
+      if check_winner?(@player_one)
         p "#{@player_one.name} wins"
+        game_is_on = false
+      elsif check_for_draw?
+        p 'It is a draw'
+        game_is_on = false
       else
         turn(@player_two)
-        if check_endgame?(@player_two) == true
-          game_is_on = false
+        if check_winner?(@player_two)
           p "#{@player_two.name} wins"
+          game_is_on = false
+        elsif check_for_draw?
+          p 'It is a draw'
+          game_is_on = false
         end
       end
     end
@@ -36,30 +42,34 @@ class Match
     # check_endgame?
   end
 
-  def check_endgame?(current_player)
-    check_rows?(current_player)
-    check_columns?(current_player)
-    check_diagonals?(current_player)
+  def check_winner?(current_player)
+    return true if check_rows?(current_player)
+    return true if check_columns?(current_player)
+    return true if check_diagonals?(current_player)
+
+    false
   end
 
   def check_rows?(current_player)
-    #  1 CONDITION: if all elements in a row are the same (X or O) return TRUE
+    #  1 CONDITION: if all elements in a row are the same (X or O) return TRUE else return FALSE
     board = @gameboard.board
     board.each do |row|
       return true if row.all? { |element| element == current_player.symbol }
     end
+    false
   end
 
   def check_columns?(current_player)
-    #  2 CONDITION: if all elements in a column (across multiple arrays) are the same (X or O) return TRUE.
+    #  2 CONDITION: if all elements in a column (across multiple arrays) are the same (X or O) return TRUE else return FALSE
     board = @gameboard.board.transpose
     board.each do |row|
       return true if row.all? { |element| element == current_player.symbol }
     end
+    false
   end
 
   def check_diagonals?(current_player)
-    #  3 CONDITION: if all elements in diagonal (across multiple arrays) are the same (X or O) return TRUE
+    #  3 CONDITION: if all elements in diagonal (across multiple arrays) are the same (X or O) return TRUE else return FALSE
     board = @gameboard.board
     first_diagonal = [board[0][0], board[1][1], board[2][2]]
     second_diagonal = [board[0][2], board[1][1], board[2][0]]
@@ -69,6 +79,8 @@ class Match
 
   def check_for_draw?
     #  4 CONDITION: if none of the arrays contains a number then the board is full and it is a draw, return TRUE
+    board = @gameboard.board.flatten(3)
+    true if board.none? { |element| element.is_a?(Integer) }
   end
 end
 
