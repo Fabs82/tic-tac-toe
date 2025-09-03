@@ -81,6 +81,3 @@ class Match
     true if board.none? { |element| element.is_a?(Integer) }
   end
 end
-
-game = Match.new
-game.start_game
