@@ -1,10 +1,11 @@
 require_relative 'player'
 require_relative 'gameboard'
-# classe che gestisce l'andamento dell'intero gioco appoggiandosi sulla classe Gameboard e PLayer
+require 'colorize'
+# classe che gestisce l'andamento dell'intero gioco appoggiandosi sulla classe Gameboard e Player
 class Match
   def initialize
-    @player_one = Player.new('Fabio', 'X')
-    @player_two = Player.new('Biagio', 'O')
+    @player_one = Player.new('Player 1', 'X'.colorize(:red))
+    @player_two = Player.new('Player 2', 'O'.colorize(:green))
     @gameboard = Gameboard.new
   end
 
@@ -12,19 +13,19 @@ class Match
     @gameboard.display_gameboard
     game_is_on = true
     players = [@player_one, @player_two]
-    position = 0
+    player_position = 0
     while game_is_on
-      current_player = players[position % 2]
-      p "TURN NUMBER #{position + 1}"
+      current_player = players[player_position % 2]
+      puts "TURN NUMBER #{player_position + 1}"
       turn(current_player)
       if check_winner?(current_player)
-        p "#{current_player.name} wins"
+        puts "#{current_player.name} wins!"
         game_is_on = false
       elsif check_for_draw?
-        p 'It is a draw'
+        puts 'It is a draw!'
         game_is_on = false
       else
-        position += 1
+        player_position += 1
       end
     end
   end
@@ -37,7 +38,6 @@ class Match
     end
     @gameboard.update_position(current_player.symbol, position)
     @gameboard.display_gameboard
-    # check_endgame?
   end
 
   def check_winner?(current_player)

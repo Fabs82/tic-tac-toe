@@ -3,6 +3,7 @@ class Gameboard
   attr_reader :board
 
   def initialize
+    # la board é un matrix di 3 nested arrays inizializzata con un doppio loop
     @board = []
     n = 1
     3.times do |nested_array|
@@ -15,6 +16,7 @@ class Gameboard
   end
 
   def check_position?(position)
+    # Return TRUE se lil numero inserito dal player == al numero contenuto nella cell della posizione scelta. altrimenti FALSE
     row = (position - 1) / @board.length
     column = (position - 1) % @board.length
     # p @board[row][column]

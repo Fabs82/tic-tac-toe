@@ -5,14 +5,15 @@ class Player
   def initialize(name, symbol)
     @name = name
     @symbol = symbol
-    puts "Player initialized - Name: #{@name} | Symbol: #{@symbol}"
+    puts "Ready #{@name} | Symbol: #{@symbol}"
   end
 
   def make_choice
-    puts "Please #{@name}, make your choice (a number  between 1 and 9)"
+    # metodo che chiede al giocatore un numero obbligatoriamente da 1 a 9
+    puts "Please #{@name}, make your choice (a number between 1 and 9)"
     position = gets.chomp.to_i
     until position.between?(1, 9)
-      puts 'Position not valid. Please make your choice (a number  between 1 and 9)'
+      puts 'The number entered is not valid. Please make your choice (a number between 1 and 9)'
       position = gets.chomp.to_i
     end
     position
