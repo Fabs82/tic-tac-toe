@@ -1,4 +1,4 @@
-# Classe che gestisce i due giocatori: prende un nome e il simbolo come argomenti
+# A class that manages the two players: it takes a name and a symbol as arguments.
 class Player
   attr_reader :symbol, :name
 
@@ -9,7 +9,7 @@ class Player
   end
 
   def make_choice
-    # metodo che chiede al giocatore un numero obbligatoriamente da 1 a 9
+    # A method that requires the player to enter a number, which must be between 1 and 9.
     puts "Please #{@name}, make your choice (a number between 1 and 9)"
     position = gets.chomp.to_i
     until position.between?(1, 9)
@@ -19,9 +19,3 @@ class Player
     position
   end
 end
-
-# test per controllo funzionalità
-# player_one = Player.new('Fabio', 'X')
-# player_two = Player.new('Biagio', 'O')
-# player_one.make_choice
-# player_two.make_choice

@@ -1,7 +1,7 @@
 require_relative 'player'
 require_relative 'gameboard'
 require 'colorize'
-# classe che gestisce l'andamento dell'intero gioco appoggiandosi sulla classe Gameboard e Player
+# A class that manages the progression of the entire game by relying on the Gameboard and Player classes.
 class Match
   def initialize
     @player_one = Player.new('Player 1', 'X'.colorize(:red))
@@ -31,6 +31,8 @@ class Match
   end
 
   def turn(current_player)
+    # It takes the position from the make_choice method in the Player Class.
+    # It keeps prompting if the update_position method in the Gameboard Class does not return True
     position = current_player.make_choice
     until @gameboard.check_position?(position) == true
       puts 'Position not valid'
@@ -58,7 +60,7 @@ class Match
   end
 
   def check_columns?(current_player)
-    #  2 CONDITION: if all elements in a column (across multiple arrays) are the same (X or O) return TRUE else return FALSE
+    #  2 CONDITION: if all elements in a column are the same (X or O) return TRUE else return FALSE
     board = @gameboard.board.transpose
     board.each do |row|
       return true if row.all? { |element| element == current_player.symbol }
@@ -67,7 +69,7 @@ class Match
   end
 
   def check_diagonals?(current_player)
-    #  3 CONDITION: if all elements in diagonal (across multiple arrays) are the same (X or O) return TRUE else return FALSE
+    #  3 CONDITION: if all elements in diagonal are the same (X or O) return TRUE else return FALSE
     board = @gameboard.board
     first_diagonal = [board[0][0], board[1][1], board[2][2]]
     second_diagonal = [board[0][2], board[1][1], board[2][0]]

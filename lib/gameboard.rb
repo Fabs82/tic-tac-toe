@@ -1,9 +1,9 @@
-# Classe che crea e gestisce la gameboard. Controlla se la cell é disponibile e posiziona la scelta del Player
+# A class that creates and manages the game board. It checks if the cell is available and places the player's choice.
 class Gameboard
   attr_reader :board
 
   def initialize
-    # la board é un matrix di 3 nested arrays inizializzata con un doppio loop
+    # A 3x3 matrix
     @board = []
     n = 1
     3.times do |nested_array|
@@ -16,10 +16,9 @@ class Gameboard
   end
 
   def check_position?(position)
-    # Return TRUE se lil numero inserito dal player == al numero contenuto nella cell della posizione scelta. altrimenti FALSE
+    # Returns TRUE if the number entered by the player is equal to the number in the chosen cell.
     row = (position - 1) / @board.length
     column = (position - 1) % @board.length
-    # p @board[row][column]
     @board[row][column] == position
   end
 
@@ -30,7 +29,6 @@ class Gameboard
   end
 
   def display_gameboard
-    # @board.each { |row| row.join(' | ') }
     puts "\n"
     @board.each_with_index do |row, idx|
       puts row.join(' | ')
@@ -39,8 +37,3 @@ class Gameboard
     puts "\n"
   end
 end
-
-# test per controllo funzionalità
-# gameboard = Gameboard.new
-# gameboard.check_position?(1)
-# gameboard.update_position('X', 9)
