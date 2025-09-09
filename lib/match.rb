@@ -8,6 +8,7 @@ class Match
     @player_two = Player.new('Player 2', 'O'.colorize(:green))
     @gameboard = Gameboard.new
     @player_position = 0
+    @match_number = 0
   end
 
   def start_game
@@ -16,7 +17,7 @@ class Match
     players = [@player_one, @player_two]
     while game_is_on
       current_player = players[@player_position % 2]
-      puts "TURN NUMBER #{@player_position + 1}"
+      puts "GAME #{@match_number + 1} - TURN #{@player_position + 1}"
       turn(current_player)
       if check_winner?(current_player)
         puts "#{current_player.name} wins!"
@@ -74,6 +75,7 @@ class Match
     @gameboard = Gameboard.new
     @gameboard.display_gameboard
     @player_position = 0
+    @match_number += 1
   end
 
   def check_rows?(current_player)
