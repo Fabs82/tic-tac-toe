@@ -7,25 +7,33 @@ class Match
     @player_one = Player.new('Player 1', 'X'.colorize(:red))
     @player_two = Player.new('Player 2', 'O'.colorize(:green))
     @gameboard = Gameboard.new
+    @player_position = 0
   end
 
   def start_game
     @gameboard.display_gameboard
     game_is_on = true
     players = [@player_one, @player_two]
-    player_position = 0
     while game_is_on
-      current_player = players[player_position % 2]
-      puts "TURN NUMBER #{player_position + 1}"
+      current_player = players[@player_position % 2]
+      puts "TURN NUMBER #{@player_position + 1}"
       turn(current_player)
       if check_winner?(current_player)
         puts "#{current_player.name} wins!"
-        game_is_on = false
+        if play_again?
+          reset_game
+        else
+          game_is_on = false
+        end
       elsif check_for_draw?
         puts 'It is a draw!'
-        game_is_on = false
+        if play_again?
+          reset_game
+        else
+          game_is_on = false
+        end
       else
-        player_position += 1
+        @player_position += 1
       end
     end
   end
@@ -48,6 +56,24 @@ class Match
     return true if check_diagonals?(current_player)
 
     false
+  end
+
+  def play_again?
+    puts 'Play again? (y/n)'
+    answer = gets.chomp.downcase
+    until %w[y n].include?(answer)
+      puts 'Play again?'
+      answer = gets.chomp.downcase
+    end
+    return true if answer == 'y'
+
+    false
+  end
+
+  def reset_game
+    @gameboard = Gameboard.new
+    @gameboard.display_gameboard
+    @player_position = 0
   end
 
   def check_rows?(current_player)
