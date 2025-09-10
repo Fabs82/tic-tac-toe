@@ -24,6 +24,7 @@ class Match
         if play_again?
           reset_game
         else
+          puts 'Thanks for playing Tic Tac Toe'
           game_is_on = false
         end
       elsif check_for_draw?
@@ -31,6 +32,7 @@ class Match
         if play_again?
           reset_game
         else
+          puts 'Thanks for playing Tic Tac Toe'
           game_is_on = false
         end
       else
