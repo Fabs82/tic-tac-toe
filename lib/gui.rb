@@ -6,6 +6,7 @@ class GuiGameboard
     @match_instance = match_instance
     @message = Text.new('', x: 120, y: 450, size: 20, color: 'white')
     @turn_number_message = Text.new('GAME 1 - TURN 1 - Player 1', x: 105, y: 25, size: 20, color: 'white')
+    @endgame_message = Text.new('', x: 190, y: 450, size: 20, color: 'green')
     Window.set(
       title: 'Tic Tac Toe',
       background: 'navy',
@@ -106,7 +107,11 @@ class GuiGameboard
     @turn_number_message.text = "GAME #{match_number} - TURN #{turn_number} - #{player_name}"
   end
 
-  def declare_endgame
-    # let the players know the game has ended with a text message
+  def declare_winner(player_name)
+    @endgame_message.text = "#{player_name} won"
+  end
+
+  def declare_draw
+    @endgame_message.text = "It's a draw!"
   end
 end

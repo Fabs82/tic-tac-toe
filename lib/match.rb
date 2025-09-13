@@ -20,14 +20,14 @@ class Match
       @gameboard.update_position(symbol, cell_number)
       @gui.draw_symbol(cell_number, symbol)
       @player_position += 1
-      next_player = @players[@player_position % 2]
-      @gui.turn_number(@match_number + 1, @player_position + 1, next_player.name)
     end
     if check_winner?(current_player)
-      puts "#{current_player.name} won"
+      @gui.declare_winner(current_player.name)
     elsif check_for_draw?
-      puts "It's a draw!"
+      @gui.declare_draw
     end
+    next_player = @players[@player_position % 2]
+    @gui.turn_number(@match_number + 1, @player_position + 1, next_player.name)
   end
 
   def check_winner?(current_player)

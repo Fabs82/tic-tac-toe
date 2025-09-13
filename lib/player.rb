@@ -5,7 +5,7 @@ class Player
   def initialize(name, symbol)
     @name = name
     @symbol = symbol
-    puts "Ready #{@name} | Symbol: #{@symbol}"
+    # puts "Ready #{@name} | Symbol: #{@symbol}"
   end
 end
 
