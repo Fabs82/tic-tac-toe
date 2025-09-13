@@ -7,3 +7,5 @@ source 'https://rubygems.org'
 gem 'rubocop', '~> 1.78'
 
 gem "colorize", "~> 1.1"
+
+gem "ruby2d", "~> 0.12.1"
