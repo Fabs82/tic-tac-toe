@@ -48,6 +48,9 @@ class GuiGameboard
   end
 
   def handle_click(event_x, event_y)
+    # check before eveyy click if the game is over, else go ahead and play
+    return if @match_instance.game_over
+
     # the logic to check the x-y coordinates against the cells cooridnates and return a 1 to 9 number.
     if event_x.between?(100, 200) && event_y.between?(100, 200)
       cell_number = 1

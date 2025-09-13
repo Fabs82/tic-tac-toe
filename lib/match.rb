@@ -3,6 +3,8 @@ require_relative 'gameboard'
 require 'colorize'
 # A class that manages the progression of the entire game by relying on the Gameboard and Player classes.
 class Match
+  attr_reader :game_over
+
   def initialize(gui)
     @gui = gui
     @gameboard = Gameboard.new
@@ -11,6 +13,7 @@ class Match
     @players = [@player_one, @player_two]
     @player_position = 0
     @match_number = 0
+    @game_over = false
   end
 
   def process_player_choice(cell_number)
@@ -23,8 +26,10 @@ class Match
     end
     if check_winner?(current_player)
       @gui.declare_winner(current_player.name)
+      @game_over = true
     elsif check_for_draw?
       @gui.declare_draw
+      @game_over = true
     end
     next_player = @players[@player_position % 2]
     @gui.turn_number(@match_number + 1, @player_position + 1, next_player.name)
