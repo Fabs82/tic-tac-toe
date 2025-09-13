@@ -27,13 +27,4 @@ class Gameboard
     column = (position - 1) % @board.length
     @board[row][column] = symbol
   end
-
-  def display_gameboard
-    puts "\n"
-    @board.each_with_index do |row, idx|
-      puts row.join(' | ')
-      puts '---------' if idx < 2
-    end
-    puts "\n"
-  end
 end

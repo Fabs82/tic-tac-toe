@@ -4,6 +4,8 @@ require 'ruby2d'
 class GuiGameboard
   def initialize(match_instance)
     @match_instance = match_instance
+    @message = Text.new('', x: 120, y: 450, size: 20, color: 'white')
+    @turn_number_message = Text.new('GAME 1 - TURN 1 - Player 1', x: 105, y: 25, size: 20, color: 'white')
     Window.set(
       title: 'Tic Tac Toe',
       background: 'navy',
@@ -45,7 +47,6 @@ class GuiGameboard
   end
 
   def handle_click(event_x, event_y)
-    puts event_x, event_y
     # the logic to check the x-y coordinates against the cells cooridnates and return a 1 to 9 number.
     if event_x.between?(100, 200) && event_y.between?(100, 200)
       cell_number = 1
@@ -66,10 +67,10 @@ class GuiGameboard
     elsif event_x.between?(300, 400) && event_y.between?(300, 400)
       cell_number = 9
     else
-      puts 'out of bound'
+      @message.text = 'Out of bound. Choose again'
       return
     end
-
+    @message.text = ''
     @match_instance.process_player_choice(cell_number)
   end
 
@@ -77,28 +78,35 @@ class GuiGameboard
     color = if symbol == 'X'
               'red'
             else
-              'green'
+              'yellow'
             end
-
     case cell_number
     when 1
-      Text.new(symbol, x: 135, y: 115, size: 50, color: color)
+      Text.new(symbol, x: 132, y: 115, size: 50, color: color)
     when 2
-      Text.new(symbol, x: 235, y: 115, size: 50, color: color)
+      Text.new(symbol, x: 232, y: 115, size: 50, color: color)
     when 3
-      Text.new(symbol, x: 335, y: 115, size: 50, color: color)
+      Text.new(symbol, x: 332, y: 115, size: 50, color: color)
     when 4
-      Text.new(symbol, x: 135, y: 215, size: 50, color: color)
+      Text.new(symbol, x: 132, y: 215, size: 50, color: color)
     when 5
-      Text.new(symbol, x: 235, y: 215, size: 50, color: color)
+      Text.new(symbol, x: 232, y: 215, size: 50, color: color)
     when 6
-      Text.new(symbol, x: 335, y: 215, size: 50, color: color)
+      Text.new(symbol, x: 332, y: 215, size: 50, color: color)
     when 7
-      Text.new(symbol, x: 135, y: 315, size: 50, color: color)
+      Text.new(symbol, x: 132, y: 315, size: 50, color: color)
     when 8
-      Text.new(symbol, x: 235, y: 315, size: 50, color: color)
+      Text.new(symbol, x: 232, y: 315, size: 50, color: color)
     when 9
-      Text.new(symbol, x: 335, y: 315, size: 50, color: color)
+      Text.new(symbol, x: 332, y: 315, size: 50, color: color)
     end
+  end
+
+  def turn_number(match_number, turn_number, player_name)
+    @turn_number_message.text = "GAME #{match_number} - TURN #{turn_number} - #{player_name}"
+  end
+
+  def declare_endgame
+    # let the players know the game has ended with a text message
   end
 end

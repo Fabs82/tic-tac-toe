@@ -5,28 +5,23 @@ require 'colorize'
 class Match
   def initialize(gui)
     @gui = gui
+    @gameboard = Gameboard.new
     @player_one = Player.new('Player 1', 'X')
     @player_two = Player.new('Player 2', 'O')
     @players = [@player_one, @player_two]
-    @gameboard = Gameboard.new
     @player_position = 0
     @match_number = 0
-  end
-
-  def start_game
   end
 
   def process_player_choice(cell_number)
     current_player = @players[@player_position % 2]
     symbol = current_player.symbol
-    puts "GAME #{@match_number + 1} - TURN #{@player_position + 1} - #{current_player.name}"
     if @gameboard.check_position?(cell_number)
       @gameboard.update_position(symbol, cell_number)
       @gui.draw_symbol(cell_number, symbol)
-      @gameboard.display_gameboard # needs refactoring to a GUI update method
       @player_position += 1
-    else
-      puts "Invalid move! Cell #{cell_number} is already taken."
+      next_player = @players[@player_position % 2]
+      @gui.turn_number(@match_number + 1, @player_position + 1, next_player.name)
     end
     if check_winner?(current_player)
       puts "#{current_player.name} won"
@@ -57,7 +52,6 @@ class Match
 
   def reset_game
     @gameboard = Gameboard.new
-    @gameboard.display_gameboard
     @player_position = 0
     @match_number += 1
   end
