@@ -9,4 +9,9 @@ on :mouse_down do |event|
   gui.handle_click(event.x, event.y)
 end
 
+on :key_down do |event|
+  # Only process the key if the game is over
+  match.handle_play_again(event.key) if match.game_over
+end
+
 show

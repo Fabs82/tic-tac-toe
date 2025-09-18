@@ -27,9 +27,11 @@ class Match
     if check_winner?(current_player)
       @gui.declare_winner(current_player.name)
       @game_over = true
+      @gui.play_again_message
     elsif check_for_draw?
       @gui.declare_draw
       @game_over = true
+      @gui.play_again_message
     end
     next_player = @players[@player_position % 2]
     @gui.turn_number(@match_number + 1, @player_position + 1, next_player.name)
@@ -43,22 +45,13 @@ class Match
     false
   end
 
-  def play_again?
-    puts 'Play again? (y/n)'
-    answer = gets.chomp.downcase
-    until %w[y n].include?(answer)
-      puts 'Play again?'
-      answer = gets.chomp.downcase
-    end
-    return true if answer == 'y'
-
-    false
-  end
-
   def reset_game
     @gameboard = Gameboard.new
     @player_position = 0
     @match_number += 1
+    @game_over = false
+    initial_player = @players[@player_position % 2]
+    @gui.turn_number(@match_number + 1, @player_position + 1, initial_player.name)
   end
 
   def check_rows?(current_player)
@@ -92,5 +85,15 @@ class Match
     #  4 CONDITION: if none of the arrays contains a number then the board is full and it is a draw, return TRUE
     board = @gameboard.board.flatten(3)
     true if board.none? { |element| element.is_a?(Integer) }
+  end
+
+  def handle_play_again(player_answer)
+    if player_answer == 'y'
+      reset_game
+      # update the gui board
+      @gui.clear_board
+    elsif player_answer == 'n'
+      Window.close
+    end
   end
 end

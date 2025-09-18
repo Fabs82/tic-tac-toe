@@ -6,7 +6,9 @@ class GuiGameboard
     @match_instance = match_instance
     @message = Text.new('', x: 120, y: 450, size: 20, color: 'white')
     @turn_number_message = Text.new('GAME 1 - TURN 1 - Player 1', x: 105, y: 25, size: 20, color: 'white')
-    @endgame_message = Text.new('', x: 190, y: 450, size: 20, color: 'green')
+    @endgame_message = Text.new('', x: 180, y: 450, size: 20, color: 'green')
+    @message_play_again = Text.new('', x: 120, y: 400, size: 20, color: 'white')
+    @symbols_drawn = []
     Window.set(
       title: 'Tic Tac Toe',
       background: 'navy',
@@ -86,24 +88,25 @@ class GuiGameboard
             end
     case cell_number
     when 1
-      Text.new(symbol, x: 132, y: 115, size: 50, color: color)
+      new_symbol = Text.new(symbol, x: 132, y: 115, size: 50, color: color)
     when 2
-      Text.new(symbol, x: 232, y: 115, size: 50, color: color)
+      new_symbol = Text.new(symbol, x: 232, y: 115, size: 50, color: color)
     when 3
-      Text.new(symbol, x: 332, y: 115, size: 50, color: color)
+      new_symbol = Text.new(symbol, x: 332, y: 115, size: 50, color: color)
     when 4
-      Text.new(symbol, x: 132, y: 215, size: 50, color: color)
+      new_symbol = Text.new(symbol, x: 132, y: 215, size: 50, color: color)
     when 5
-      Text.new(symbol, x: 232, y: 215, size: 50, color: color)
+      new_symbol = Text.new(symbol, x: 232, y: 215, size: 50, color: color)
     when 6
       Text.new(symbol, x: 332, y: 215, size: 50, color: color)
     when 7
-      Text.new(symbol, x: 132, y: 315, size: 50, color: color)
+      new_symbol = Text.new(symbol, x: 132, y: 315, size: 50, color: color)
     when 8
-      Text.new(symbol, x: 232, y: 315, size: 50, color: color)
+      new_symbol = Text.new(symbol, x: 232, y: 315, size: 50, color: color)
     when 9
-      Text.new(symbol, x: 332, y: 315, size: 50, color: color)
+      new_symbol = Text.new(symbol, x: 332, y: 315, size: 50, color: color)
     end
+    @symbols_drawn << new_symbol
   end
 
   def turn_number(match_number, turn_number, player_name)
@@ -116,5 +119,17 @@ class GuiGameboard
 
   def declare_draw
     @endgame_message.text = "It's a draw!"
+  end
+
+  def play_again_message
+    @message_play_again.text = 'Restart a new game? (y/n)'
+  end
+
+  def clear_board
+    @endgame_message.text = ''
+    @message_play_again.text = ''
+    @symbols_drawn.each do |symbol|
+      symbol.remove
+    end
   end
 end
