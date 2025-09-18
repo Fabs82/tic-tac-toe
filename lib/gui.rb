@@ -98,7 +98,7 @@ class GuiGameboard
     when 5
       new_symbol = Text.new(symbol, x: 232, y: 215, size: 50, color: color)
     when 6
-      Text.new(symbol, x: 332, y: 215, size: 50, color: color)
+      new_symbol = Text.new(symbol, x: 332, y: 215, size: 50, color: color)
     when 7
       new_symbol = Text.new(symbol, x: 132, y: 315, size: 50, color: color)
     when 8
