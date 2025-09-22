@@ -8,7 +8,9 @@ class GuiGameboard
     @turn_number_message = Text.new('GAME 1: Turn 1 - Player 1', x: 67, y: 25, font: './lib/Arcade.ttf', size: 30,
                                                                  color: 'white')
     @endgame_message = Text.new('', x: 158, y: 58, font: './lib/Arcade.ttf', size: 30, color: 'green')
-    @message_play_again = Text.new('', x: 65, y: 445, font: './lib/Arcade.ttf', size: 30, color: 'white')
+    @message_play_again = Text.new('', x: 65, y: 415, font: './lib/Arcade.ttf', size: 30, color: 'white')
+    @score_p_one = Text.new('Player 1: 0', x: 25, y: 450, font: './lib/Arcade.ttf', size: 20, color: 'white')
+    @score_p_two = Text.new('Player 2: 0', x: 25, y: 475, font: './lib/Arcade.ttf', size: 20, color: 'white')
     @symbols_drawn = []
     Window.set(
       title: 'Tic Tac Toe',
@@ -74,7 +76,6 @@ class GuiGameboard
     elsif event_x.between?(300, 400) && event_y.between?(300, 400)
       cell_number = 9
     else
-      @message.text = 'Out of bound. Choose again'
       return
     end
     @message.text = ''
@@ -112,6 +113,11 @@ class GuiGameboard
 
   def turn_number(match_number, turn_number, player_name)
     @turn_number_message.text = "GAME #{match_number}: Turn #{turn_number} - #{player_name}"
+  end
+
+  def change_score(score_p_one, score_p_two)
+    @score_p_one.text = "Player 1: #{score_p_one}"
+    @score_p_two.text = "Player 2: #{score_p_two}"
   end
 
   def declare_winner(player_name)

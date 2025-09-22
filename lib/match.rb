@@ -13,6 +13,8 @@ class Match
     @players = [@player_one, @player_two]
     @player_position = 0
     @match_number = 0
+    @score_p_one = 0
+    @score_p_two = 0
     @game_over = false
   end
 
@@ -26,6 +28,11 @@ class Match
     end
     if check_winner?(current_player)
       @gui.declare_winner(current_player.name)
+      if current_player.name == 'Player 1'
+        @gui.change_score(@score_p_one += 1, @score_p_two)
+      elsif current_player.name == 'Player 2'
+        @gui.change_score(@score_p_one, @score_p_two += 1)
+      end
       @game_over = true
       @gui.play_again_message
     elsif check_for_draw?
